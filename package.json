@@ -9,6 +9,10 @@
   },
   "author": "Forrest Labrum",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-dropzone-component": "^1.0.4",
+    "transloadit": "^1.5.3"
   }
 }
