@@ -1,0 +1,14 @@
+{
+  "name": "convert.it",
+  "version": "1.0.0",
+  "description": "Simple online audio converter",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/test.js",
+    "start": "node server/index.js"
+  },
+  "author": "Forrest Labrum",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
