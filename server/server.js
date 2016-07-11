@@ -1,6 +1,8 @@
 var express           = require('express'),
     TransloaditClient = require('transloadit'),
-    TRANSLOADIT_API   = process.env.TRANSLOADIT_API || require('./lib/TRANSLOADIT_API.js')
+    TRANSLOADIT_API   = process.env.TRANSLOADIT_KEY ? { authKey: process.env.TRANSLOADIT_KEY,
+                                                        authSecret: process.env.TRANSLOADIT_SECRET }
+                                                    : require('./lib/TRANSLOADIT_API.js'),
     app               = express();
 
 var transloadit = new TransloaditClient(TRANSLOADIT_API);
