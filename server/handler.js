@@ -12,4 +12,7 @@ exports.upload = function(req, res) {
       encoder.encode(filename, '', res);
     })
   })
+  req.busboy.on('field', function(fieldname, val) {
+    console.log(fieldname, val);
+  });
 }
