@@ -62,7 +62,10 @@
 	 */
 	var djsConfig = {
 	    addRemoveLinks: true,
-	    acceptedFiles: "audio/mp4,audio/mp3,audio/wav"
+	    acceptedFiles: "audio/mp4,audio/mp3,audio/wav",
+	    params: {
+	    	format: 'mp3'
+	    }
 	};
 
 	/**
