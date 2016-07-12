@@ -82,8 +82,14 @@
 	/**
 	 * Simple callbacks work too, of course.
 	 */
-	var simpleCallBack = function() {
-	    console.log('I\'m a simple callback');
+	var simpleCallBack = function(file) {
+		var url = JSON.parse(file.xhr.response).url
+
+		var urlNode = document.createElement('a');
+		urlNode.setAttribute('href', url);
+		urlNode.setAttribute('download', 'true');
+		urlNode.innerHTML = "Download File";
+	  document.getElementById('result').appendChild(urlNode);
 	};
 
 	/**
@@ -100,14 +106,14 @@
 	    dragover: null,
 	    dragleave: null,
 	    // All of these receive the file as first parameter:
-	    addedfile: simpleCallBack,
+	    addedfile: null,
 	    removedfile: null,
 	    thumbnail: null,
 	    error: null,
 	    processing: null,
 	    uploadprogress: null,
 	    sending: null,
-	    success: null,
+	    success: simpleCallBack,
 	    complete: null,
 	    canceled: null,
 	    maxfilesreached: null,
@@ -21417,7 +21423,7 @@
 	          if (xhr.readyState !== 4) {
 	            return;
 	          }
-	          response = xhr.responseText;
+	          response = xhr.url;
 	          if (xhr.getResponseHeader("content-type") && ~xhr.getResponseHeader("content-type").indexOf("application/json")) {
 	            try {
 	              response = JSON.parse(response);

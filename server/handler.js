@@ -9,7 +9,7 @@ exports.upload = function(req, res) {
     stream = fs.createWriteStream(__dirname + '/files/' + filename);
     file.pipe(stream);
     stream.on('close', function () {
-      encoder.encode(filename);
+      encoder.encode(filename, '', res);
     })
   })
 }
