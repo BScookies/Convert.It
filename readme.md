@@ -32,11 +32,10 @@ Once the project moves into development, the press release can be used as a touc
   "I think it works, maybe." - corporate shill
 
 ## How to Get Started ##.
-  Simply visit --INSERT LINK LATER-- to start uploading your files!
+  Simply visit [https://convert-it.herokuapp.com/](https://convert-it.herokuapp.com/) to start uploading your files!
 
 ## What People Are Saying ##
   "I also think it works, maybe" - Neko Atsume
 
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
-  VISIT --INSERT LINK LATER-- AND NEVER SEE THE "CANNOT PLAY THIS FILE" WARNING EVER AGAIN
+## What Next ##
+  Visit [https://convert-it.herokuapp.com/](https://convert-it.herokuapp.com/) and never see the "CANNOT PLAY THIS FILE" warning ever again
