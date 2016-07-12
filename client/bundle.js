@@ -50,7 +50,7 @@
 	var DropzoneComponent = __webpack_require__(158);
 
 	var componentConfig = {
-	    iconFiletypes: ['.jpg', '.png', '.gif'],
+	    iconFiletypes: ['.mp4', '.mp3', '.wav'],
 	    showFiletypeIcon: true,
 	    postUrl: '/uploadHandler'
 	};
@@ -62,7 +62,7 @@
 	 */
 	var djsConfig = {
 	    addRemoveLinks: true,
-	    acceptedFiles: "image/jpeg,image/png,image/gif"
+	    acceptedFiles: "audio/mp4,audio/mp3,audio/wav"
 	};
 
 	/**
@@ -127,10 +127,10 @@
 	}
 
 	// Render
-	React.render(React.createElement(DropzoneComponent, { 
+	React.render(React.createElement(DropzoneComponent, {
 	        config: componentConfig,
 	        eventHandlers: eventHandlers,
-	        djsConfig: djsConfig 
+	        djsConfig: djsConfig
 	    }), document.getElementById('content')
 	);
 
@@ -142,10 +142,10 @@
 	    showFiletypeIcon: true,
 	};
 
-	React.render(React.createElement(DropzoneComponent, { 
+	React.render(React.createElement(DropzoneComponent, {
 	        config: componentConfigWithoutPostUrl,
 	        eventHandlers: eventHandlers,
-	        djsConfig: djsConfig 
+	        djsConfig: djsConfig
 	        action: 'post.php'
 	    }), document.getElementById('content')
 	);
@@ -14711,7 +14711,7 @@
 	 *
 	 * @providesModule shallowEqual
 	 * @typechecks
-	 * 
+	 *
 	 */
 
 	'use strict';
@@ -19876,15 +19876,15 @@
 
 	        if (!this.props.config.postUrl && this.props.action) {
 	            return (
-	                React.createElement("form", {action: this.props.action, className: className}, 
-	                    icons, 
+	                React.createElement("form", {action: this.props.action, className: className},
+	                    icons,
 	                    this.props.children
 	                )
 	            );
 	        } else {
 	            return (
-	                React.createElement("div", {className: className}, 
-	                    icons, 
+	                React.createElement("div", {className: className},
+	                    icons,
 	                    this.props.children
 	                )
 	            );
@@ -20098,7 +20098,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	    
+
 	var Icon = React.createClass({displayName: "Icon",
 	    render: function () {
 	        return (
@@ -20221,9 +20221,9 @@
 
 	    /*
 	    This is a list of all available events you can register on a dropzone object.
-	    
+
 	    You can register an event handler like this:
-	    
+
 	        dropzone.on("dragEnter", function() { });
 	     */
 
@@ -21771,7 +21771,7 @@
 
 
 	  /*
-	  
+
 	  Bugfix for iOS 6 and 7
 	  Source: http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
 	  based on the work of https://github.com/stomita/ios-imagefile-megapixel

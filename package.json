@@ -9,7 +9,10 @@
   },
   "author": "Forrest Labrum",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect-busboy": "0.0.2",
     "express": "^4.14.0",
+    "fs": "0.0.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-dropzone-component": "^1.0.4",

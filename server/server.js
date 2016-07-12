@@ -3,10 +3,13 @@ var express           = require('express'),
     TRANSLOADIT_API   = process.env.TRANSLOADIT_KEY ? { authKey: process.env.TRANSLOADIT_KEY,
                                                         authSecret: process.env.TRANSLOADIT_SECRET }
                                                     : require('./lib/TRANSLOADIT_API.js'),
+    handler           = require('./handler'),
+    busboy            = require('connect-busboy'),
     app               = express();
 
 var transloadit = new TransloaditClient(TRANSLOADIT_API);
 
+/*
 transloadit.addFile('test', './test.wav');
 
 var assemblyOptions = {
@@ -27,7 +30,10 @@ transloadit.createAssembly(assemblyOptions, function(err, result) {
     assemblyId: assemblyId
   });
 });
-
+*/
 app.use(express.static('client'));
+app.use(busboy());
+
+app.post('/uploadHandler', handler.upload)
 
 module.exports = app;
