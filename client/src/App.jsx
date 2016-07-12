@@ -75,7 +75,13 @@ class App extends React.Component {
 
     this.setState({djsConfig: djsConfig});
     this.setState({formatSelectVisibility: 'hidden'})
-    this.setState({qualitySelectVisiblity: ''});
+
+    if (format === 'wav') {
+      this.setState({dropzoneVisibility: ''});
+    } else {
+      this.setState({qualitySelectVisiblity: ''});
+    }
+
     console.log(this.state.djsConfig.params.format)
   }
 
