@@ -67,6 +67,12 @@ class App extends React.Component {
     urlNode.setAttribute('class', 'button');
     urlNode.innerHTML = "Download File";
     document.getElementById('content').appendChild(urlNode);
+
+    var homeNode = document.createElement('a');
+    homeNode.setAttribute('href', '/');
+    homeNode.setAttribute('class', 'button');
+    homeNode.innerHTML = "Convert Another";
+    document.getElementById('content').appendChild(homeNode);
   }
 
   selectFormat(format) {
@@ -102,7 +108,7 @@ class App extends React.Component {
           <h3>Select destination format:</h3>
           <a className="button" onClick={function() { this.selectFormat('mp3') }.bind(this)}>MP3</a>
           <a className="button" onClick={function() { this.selectFormat('wav') }.bind(this)}>WAV</a>
-          <a className="button" onClick={function() { this.selectFormat('aac') }.bind(this)}>AAC</a>
+          <a className="button" onClick={function() { this.selectFormat('aac') }.bind(this)}>MP4</a>
         </div>
         <div id="qualitySelect" className={this.state.qualitySelectVisiblity}>
           <h3>Select desired quality:</h3>
