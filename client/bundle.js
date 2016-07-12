@@ -84,12 +84,14 @@
 	 */
 	var simpleCallBack = function(file) {
 		var url = JSON.parse(file.xhr.response).url
+		document.getElementById('content').innerHTML = '';
 
 		var urlNode = document.createElement('a');
 		urlNode.setAttribute('href', url);
 		urlNode.setAttribute('download', 'true');
+		urlNode.setAttribute('class', 'button');
 		urlNode.innerHTML = "Download File";
-	  document.getElementById('result').appendChild(urlNode);
+	  document.getElementById('content').appendChild(urlNode);
 	};
 
 	/**
