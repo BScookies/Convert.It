@@ -4,8 +4,9 @@ body {
     font-family: sans-serif;
 }
 
-h2, h3 {
+h1, h2, h3 {
     color: #000;
+    text-align: center;
 }
 
 h2 a {
@@ -23,7 +24,8 @@ div.intro {
 }
 
 div#content {
-    width: 500px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .filepicker.dropzone .dz-preview.dz-image-preview {
@@ -32,10 +34,6 @@ div#content {
 
 .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
     border-radius: 5px;
-}
-
-#qualitySelect {
-    width: 550px;
 }
 
 .button {
@@ -65,6 +63,17 @@ div#content {
 .button:hover {
     background-color: #397CAC;
     border-color: #326E99;
+}
+
+.buttonContainer {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#upload {
+    height: 50%;
 }
 
 .hidden {

@@ -59,20 +59,25 @@ class App extends React.Component {
 
   simpleCallBack(file) {
     var url = JSON.parse(file.xhr.response).url
-    document.getElementById('content').innerHTML = '';
+    var content = document.getElementById('content');
+    content.innerHTML = '';
+
+    var divNode = document.createElement('div');
+    divNode.setAttribute('class', 'buttonContainer');
+    content.appendChild(divNode);
 
     var urlNode = document.createElement('a');
     urlNode.setAttribute('href', url);
     urlNode.setAttribute('download', 'true');
     urlNode.setAttribute('class', 'button');
     urlNode.innerHTML = "Download File";
-    document.getElementById('content').appendChild(urlNode);
+    divNode.appendChild(urlNode);
 
     var homeNode = document.createElement('a');
     homeNode.setAttribute('href', '/');
     homeNode.setAttribute('class', 'button');
     homeNode.innerHTML = "Convert Another";
-    document.getElementById('content').appendChild(homeNode);
+    divNode.appendChild(homeNode);
   }
 
   selectFormat(format) {
@@ -106,15 +111,19 @@ class App extends React.Component {
       <div id="app">
         <div id="formatSelect" className={this.state.formatSelectVisibility}>
           <h3>Select destination format:</h3>
-          <a className="button" onClick={function() { this.selectFormat('mp3') }.bind(this)}>MP3</a>
-          <a className="button" onClick={function() { this.selectFormat('wav') }.bind(this)}>WAV</a>
-          <a className="button" onClick={function() { this.selectFormat('aac') }.bind(this)}>MP4</a>
+          <div className="buttonContainer">
+            <a className="button" onClick={function() { this.selectFormat('mp3') }.bind(this)}>MP3</a>
+            <a className="button" onClick={function() { this.selectFormat('wav') }.bind(this)}>WAV</a>
+            <a className="button" onClick={function() { this.selectFormat('aac') }.bind(this)}>MP4</a>
+          </div>
         </div>
         <div id="qualitySelect" className={this.state.qualitySelectVisiblity}>
           <h3>Select desired quality:</h3>
-          <a className="button" onClick={function() { this.selectQuality('0') }.bind(this)}>Meh</a>
-          <a className="button" onClick={function() { this.selectQuality('1') }.bind(this)}>Normal</a>
-          <a className="button" onClick={function() { this.selectQuality('2') }.bind(this)}>Dayummm</a>
+          <div className="buttonContainer">
+            <a className="button" onClick={function() { this.selectQuality('0') }.bind(this)}>Meh</a>
+            <a className="button" onClick={function() { this.selectQuality('1') }.bind(this)}>Normal</a>
+            <a className="button" onClick={function() { this.selectQuality('2') }.bind(this)}>Dayummm</a>
+          </div>
         </div>
         <div id="upload" className={this.state.dropzoneVisibility}>
           <DropzoneComponent config={this.state.componentConfig} eventHandlers={this.state.eventHandlers} djsConfig={this.state.djsConfig} />
