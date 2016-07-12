@@ -1,4 +1,5 @@
 var fs = require('fs');
+var encoder = require('./util/encoder.js')
 
 exports.upload = function(req, res) {
   var stream;
@@ -8,7 +9,7 @@ exports.upload = function(req, res) {
     stream = fs.createWriteStream(__dirname + '/files/' + filename);
     file.pipe(stream);
     stream.on('close', function () {
-      res.send(200)
+      encoder.encode(filename);
     })
   })
 }
