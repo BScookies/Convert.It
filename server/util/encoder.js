@@ -4,8 +4,8 @@ var TransloaditClient = require('transloadit'),
                                                     : require('../lib/TRANSLOADIT_API.js'),
     transloadit = new TransloaditClient(TRANSLOADIT_API),
     checksum = require('checksum'),
-    cache = {},
-    waitForEncode;
+    cache = {}, // url's expire after 24 hours so we won't persist the cache
+    waitForEncode; // for the interval to check if file is done processing
 
 var getEncodeStatus = function(assemblyId, res, sum) {
   transloadit.getAssembly(assemblyId, function(err, response) {
@@ -15,13 +15,14 @@ var getEncodeStatus = function(assemblyId, res, sum) {
     } else {
       if (response.ok === 'ASSEMBLY_COMPLETED') {
         clearInterval(waitForEncode);
-        cache[sum] = response.results.encode[0].url;
-        res.json({ url: cache[sum] });
+        cache[sum] = response.results.encode[0].url; // cache the url of the result
+        res.json({ url: cache[sum] }); // then send back the url
       }
     }
   })
 }
 
+// big switch to determine which template to use based on chosen params
 var selectTemplate = function(format, quality) {
   if (format === 'mp3') {
     if (quality === '0') {
@@ -48,12 +49,15 @@ var selectTemplate = function(format, quality) {
   }
 }
 
-exports.encode = function(filename, destFormat, res, params) {
+exports.encode = function(filename, res, params) {
   var path = './server/files/' + filename;
 
+  // first check if we've processed this request before
   checksum.file(path, function(err, sum) {
+    // should check the cache for if we've processed this file w/ same settings before
     var sumWithParams = sum + '+' + params.format + '+' + params.quality;
 
+    // if we've processed this file before, respond with the cached url
     if (cache[sumWithParams]) {
       console.log('serving from cache');
       res.json({ url: cache[sumWithParams] });
@@ -62,27 +66,21 @@ exports.encode = function(filename, destFormat, res, params) {
 
       var assemblyOptions = {
         params: {
-          template_id: selectTemplate(params.format, params.quality)
+          template_id: selectTemplate(params.format, params.quality) // choose template based on selected params
         }
       }
 
+      // send the file to the transloadit server for encoding
       transloadit.createAssembly(assemblyOptions, function(err, result) {
         if (err) {
           throw new Error(err);
         }
 
-        //console.log(res);
-
-
         var assemblyId = result.assembly_id;
 
+        // keep checking to see if file is done processing
         waitForEncode = setInterval(function() { getEncodeStatus(assemblyId, res, sumWithParams) }, 1500);
-
-        console.log({
-          assemblyId: assemblyId
-        });
       });
     }
-  })
-
+  });
 }

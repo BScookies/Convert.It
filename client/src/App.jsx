@@ -4,9 +4,11 @@ class App extends React.Component {
     super()
 
     this.state = {
+      // state to toggle display:none for the divs
       formatSelectVisibility: '',
       qualitySelectVisiblity: 'hidden',
       dropzoneVisibility: 'hidden',
+      // dropzone default params + accepted filetypes
       djsConfig: {
         addRemoveLinks: true,
         acceptedFiles: "audio/mp4,audio/mp3,audio/wav",
@@ -15,11 +17,13 @@ class App extends React.Component {
           quality: '1'
         }
       },
+      // dropzone config for component
       componentConfig: {
         iconFiletypes: ['.mp4', '.mp3', '.wav'],
         showFiletypeIcon: true,
         postUrl: '/uploadHandler'
       },
+      // callbacks for dropzone events
       eventHandlers: {
         // All of these receive the event as first parameter:
         drop: null,
@@ -36,7 +40,7 @@ class App extends React.Component {
         processing: null,
         uploadprogress: null,
         sending: null,
-        success: this.simpleCallBack,
+        success: this.showDownload,
         complete: null,
         canceled: null,
         maxfilesreached: null,
@@ -57,7 +61,8 @@ class App extends React.Component {
     }
   }
 
-  simpleCallBack(file) {
+  // upon successful file processing, display link and "Convert Another" links
+  showDownload(file) {
     var url = JSON.parse(file.xhr.response).url
     var content = document.getElementById('content');
     content.innerHTML = '';
@@ -80,30 +85,34 @@ class App extends React.Component {
     divNode.appendChild(homeNode);
   }
 
+  // set convert format params from formatSelect onClick events
   selectFormat(format) {
     var djsConfig = this.state.djsConfig;
-    djsConfig.params.format = format
+    djsConfig.params.format = format;
 
     this.setState({djsConfig: djsConfig});
-    this.setState({formatSelectVisibility: 'hidden'})
 
+    // toggle format select visibility once a format has been chosen
+    this.setState({formatSelectVisibility: 'hidden'});
+
+    // if format is wav, go straight to uploader, otherwise show quality select
     if (format === 'wav') {
       this.setState({dropzoneVisibility: ''});
     } else {
       this.setState({qualitySelectVisiblity: ''});
     }
-
-    console.log(this.state.djsConfig.params.format)
   }
 
+  // set convert quality params from qualitySelect onClick events
   selectQuality(quality) {
     var djsConfig = this.state.djsConfig;
     djsConfig.params.quality = quality;
 
     this.setState({djsConfig: djsConfig});
+
+    // toggle format select visibility once a format has been chosen, then show uploader
     this.setState({qualitySelectVisiblity: 'hidden'});
     this.setState({dropzoneVisibility: ''});
-    console.log(this.state.djsConfig.params.quality)
   }
 
   render() {
@@ -132,11 +141,5 @@ class App extends React.Component {
     );
   }
 };
-
-//
-//
-// In the ES6 spec, files are "modules" and do not share a top-level scope
-// `var` declarations will only exist globally where explicitly defined
-window.App = App;
 
 ReactDOM.render(<App />, document.getElementById('content'));

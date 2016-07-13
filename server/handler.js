@@ -8,15 +8,20 @@ exports.upload = function(req, res) {
   req.pipe(req.busboy);
 
   req.busboy.on('field', function(fieldname, val) {
+    // reads the destination format and quality into params
     params[fieldname] = val;
   });
   req.busboy.on('file', function (fieldname, file, filename) {
     console.log('Uploading: ' + filename);
-    console.log('Params: ', params)
+    console.log('Params: ', params);
+
+    // write the uploaded file to disk
     stream = fs.createWriteStream(__dirname + '/files/' + filename);
     file.pipe(stream);
+
     stream.on('close', function () {
-      encoder.encode(filename, '', res, params);
+      // once we've received the entire file, pass to the encoder with the response object and encode params
+      encoder.encode(filename, res, params);
     })
   })
 }
